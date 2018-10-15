@@ -1,0 +1,17 @@
+Package: SpANR
+Type: Package
+Title: SPreading Activation in a Network in R
+Version: 0.1.0
+Authors@R: person("Cynthia", "Siew", email = "cynsiewsq@gmail.com",
+                  role = c("aut", "cre"))
+Description: A set of functions to simulate the spreading of activation among nodes in a network.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+  igraph
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+LinkingTo: 
