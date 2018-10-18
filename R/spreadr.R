@@ -9,6 +9,7 @@
 #' @param suppress Suppress nodes with a final activation of < x units at each time step to an activation value of 0. Default is 0.
 #' @param network Network where the spreading occurs. Must be specified. Must be an igraph object with a "name" property or an adjacency matrix.
 #' @param time Number of time steps to run the spreadr() function for. Default is 10.
+#' @param create_names Name nodes 1:numeber_of_nodes in case network is missing node names.
 #' @return A compiled dataframe with 'node', 'activation' and 'time' columns showing the spread of activation in the network over time.
 #' @examples
 #' #See Vignette for examples.

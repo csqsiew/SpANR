@@ -14,11 +14,13 @@ spreadr(network, start_run, retention = 0.5, time = 10, decay = 0,
 
 \item{retention}{Proportion of activation that remains in the node from which activation is being spread from. Ranges from 0 to 1. Default is 0.5.}
 
-\item{time}{Number of time steps to run the spread() function for. Default is 10.}
+\item{time}{Number of time steps to run the spreadr() function for. Default is 10.}
 
 \item{decay}{Proportion of activation that is lost at each time step. Ranges from 0 to 1. Default is 0.}
 
 \item{suppress}{Suppress nodes with a final activation of < x units at each time step to an activation value of 0. Default is 0.}
+
+\item{create_names}{Name nodes 1:numeber_of_nodes in case network is missing node names.}
 }
 \value{
 A compiled dataframe with 'node', 'activation' and 'time' columns showing the spread of activation in the network over time.
