@@ -2,12 +2,11 @@
 title: 'SpANR: A R package to simulate spreading activation in a network'
 author: "Cynthia S. Q. Siew"
 date: "`r Sys.Date()`"
-output:
-  word_document: default
-  pdf_document: default
-  html_document: default
-vignette: |
-  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ## Introduction
@@ -28,13 +27,9 @@ library(SpANR)
 
 ## 1: Generate a network object for spreading activation to occur in
 
-First, the network on which the spreading of activation occurs on must be specified. In this example, we use the `sample_gnp` function from the `igraph` R package to generate a network with 20 nodes and undirected links are randomly placed between the nodes with a probability of 0.2. It is possible for the user to create a network from an edge list or an adjacency matrix. In this step it is important to create a network object that:
+First, the network on which the spreading of activation occurs on must be specified. In this example, we use the `sample_gnp` function from the `igraph` R package to generate a network with 20 nodes and undirected links are randomly placed between the nodes with a probability of 0.2. In this step it is important that the `network` argument in the `spread` function (i) is recognized by `igraph` as a network object and has a `name` attribute (to specify meaningful node labels), or (ii) a symmetrical adjacency matrix (node names will simply be the column numbers).   
 
-(i) is recognized by `igraph` as a network object, 
-(ii) has a `name` attribute (to specify meaningful node labels, and 
-(iii) has unweighted, undirected links. 
-
-Note that the current iteration of `sanetr` implements spreading activation process in an unweighted, undirected network. Future iterations of the `sanetr` package will include the implementation of spreading activation in networks with different kinds of edges.  
+Note that in this example `SpANR` implements spreading activation process in an unweighted, undirected network, but it is possible to implement the process in a weighted network as well whereby more activation is passed between nodes that have "stronger" edges, or in a directed (asymmetric) network where activation can pass from node i to node j but not necessarily from node j to node i.    
 
 ```{r, warning=FALSE}
 library(igraph)
@@ -59,7 +54,7 @@ initial_df
 
 ## 3: Run the simulation
 
-We are finally ready to run the simulation. In this step, the user must specify the following arguments and parameters in the `sanet` function: 
+We are finally ready to run the simulation. In this step, the user must specify the following arguments and parameters in the `spread` function: 
 
 (i) *start_run*: the dataframe (`initial_df`) specified in the previous step that contains the activation values assigned to nodes at t = 0; 
 (ii) *decay*, d: the proportion of activation lost at each time step (range from 0 to 1); 
@@ -69,7 +64,7 @@ We are finally ready to run the simulation. In this step, the user must specify 
 (vi) *time*, t: the number of times to run the spreading activation process for.  
 
 ```{r}
-result <- spread(start_run = initial_df, decay = 0,
+result <- SpANR::spreadr(start_run = initial_df, decay = 0,
                               retention = 0.5, suppress = 0,
                               network = g, time = 10) 
 ```
@@ -79,7 +74,7 @@ result <- spread(start_run = initial_df, decay = 0,
 The output is a dataframe with 3 columns labeled *node*, *activation*, and *time*, and contains the activation value of each node at each time step. The output can be easily saved as a .csv file for further analysis later. A plot showing the activation levels of each node in the network at each time step is shown below.
 
 ```{r}
-head(result) # view the results
+head(result, 10) # view the results
 # write.csv(result, file = 'result.csv') # save the results 
 
 library(ggplot2) 
@@ -91,6 +86,6 @@ ggplot(data = result_t0, aes(x = time, y = activation, color = node, group = nod
 
 ### References 
 
-Siew, C. S. Q. (in prep). SpANR: A R package to simulate spreading activation in a network.  
+Siew, C. S. Q. (in prep). SpANR: A R package to simulate spreading activation in a network.      
 Vitevitch, M. S., Ercal, G., & Adagarla, B. (2011). Simulating retrieval from a highly clustered network: Implications for spoken word recognition. Frontiers in psychology, 2, 369.
 

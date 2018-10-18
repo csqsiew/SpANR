@@ -3,7 +3,7 @@ Type: Package
 Title: SPreading Activation in a Network in R
 Version: 0.1.0
 Authors@R: c(
-	person("Cynthia", "Siew", email = "cynsiewsq@gmail.com",
+	person(c("Cynthia","S.Q."), "Siew", email = "cynsiewsq@gmail.com",
                role = c("aut", "cre")),
 	person(c("Dirk","U."), "Wulff", role = "ctb",
     	       email = "dirk.wulff@gmail.com")
